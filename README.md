@@ -2,6 +2,6 @@
  some first/second grade math problems
 
 
-## find it live here:
+## use it online here:
  https://threadsmind.github.io/math-problems/
  

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head style="width: 100vw; height: 100vh; margin: 0; padding: 0;">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Math Problems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
+
+  <script>
+    let firstElement;
+    let secondElement;
+    let operationElement;
+    let answerElement;
+    let nextElement;
+    let barElement;
+    let bodyElement;
+    const operations = [minus, plus];
+    const colors = '1234567890abcdef'.split('');
+
+    const problem = {
+      first: 2,
+      second: 3,
+      operation: minus,
+      answer: 5,
+    };
+
+    function rng(l, h) {
+      return Math.floor(Math.random() * (h - l + 1)) + l;
+    }
+
+    function rngArray(l) {
+        return Math.floor(Math.random() * l);
+    }
+
+    function plus(first, second) {
+      return (!first) ? '+' : first + second;
+    }
+
+    function minus(first, second) {
+      return (!first) ? '-' : first - second;
+    }
+
+    function setBGColor() {
+      let newBGColors = '';
+      for (i = 0; i < 6; i++) {
+        newBGColors += colors[rngArray(colors.length)];
+      }
+      bodyElement.style.backgroundColor = `#${newBGColors}`;
+    }
+
+    function next() {
+      // parse input
+      const input = parseInt(answerElement.value);
+      // check answer
+      if (input === problem.answer) {
+        // if input is correct, update colors & create a new problem
+        barElement.style.backgroundColor = '#FFF';
+        newProblem();
+      } else {
+        // if input is not correct, display error colors
+        barElement.style.backgroundColor = '#FF8B8B';
+      }
+    }
+
+    function updateUI() {
+      firstElement.innerHTML = problem.first;
+      secondElement.innerHTML = problem.second;
+      operationElement.innerHTML = problem.operation();
+      answerElement.value = '';
+      setBGColor();
+    }
+
+    function newProblem() {
+      // set numbers, but make larger number first as we don't want negative answers (0 is fine)
+      const first = rng(1, 15);
+      const second = rng(0, 9);
+      if (first > second) {
+        problem.first = first;
+        problem.second = second;
+      } else {
+        problem.first = second;
+        problem.second = first;
+      }
+      // set operator
+      problem.operation = operations[rng(0, 1)];
+      // set answer
+      problem.answer = problem.operation(
+        problem.first,
+        problem.second
+      );
+      // update UI
+      updateUI()
+    }
+
+    function start() {
+      // get page elements
+      firstElement = document.getElementById('first');
+      secondElement = document.getElementById('second');
+      operationElement = document.getElementById('operation');
+      answerElement = document.getElementById('answer');
+      nextElement = document.getElementById('next');
+      barElement = document.getElementById('bar');
+      bodyElement = document.getElementsByTagName('body')[0];
+      // connect next button to next function
+      nextElement.addEventListener('click', next);
+      // allow pressing enter within answer box to call next function as well
+      answer.addEventListener('keyup', e => {
+        if (e.keyCode === 13) {
+          next();
+        } else {
+          return e;
+        }
+      });
+      // create a new problem
+      newProblem();
+    }
+
+    window.addEventListener('load', start);
+  </script>
+</head>
+
+<body style="margin: 0; padding: 0; background: #194853;">
+  <div
+    style="margin: 15% auto; max-width: 100%; font-size: 2rem; text-align: center; padding: 0.5rem; background: #fff;"
+    id="bar">
+    <span id="first">0</span>
+    <span id="operation">+</span>
+    <span id="second">0</span>
+    =
+    <input type="number" id="answer" maxlength="4" style="width:5rem; font-size: 2rem;" />
+    <div>
+      <input type="submit" value="GO!" id="next" style="padding: 1rem 2rem; margin-top: 0.5rem;" />
+    </div>
+  </div>
+</body>
+
+</html>

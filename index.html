@@ -29,7 +29,6 @@
     let answerElement;
     let nextElement;
     let barElement;
-    let bodyElement;
     const operations = [minus, plus];
     const colors = '1234567890abcdef'.split('');
 
@@ -79,7 +78,7 @@
       for (i = 0; i < 6; i++) {
         newBGColors += colors[rngArray(colors.length)];
       }
-      bodyElement.style.backgroundColor = `#${newBGColors}`;
+      document.body.style.backgroundColor = `#${newBGColors}`;
     }
 
     function newProblem() {
@@ -112,7 +111,6 @@
       answerElement = document.getElementById('answer');
       nextElement = document.getElementById('next');
       barElement = document.getElementById('bar');
-      bodyElement = document.getElementsByTagName('body')[0];
       // connect next button to next function
       nextElement.addEventListener('click', next);
       // allow pressing enter within answer box to call next function as well

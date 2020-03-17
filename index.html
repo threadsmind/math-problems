@@ -43,10 +43,6 @@
       return Math.floor(Math.random() * (h - l + 1)) + l;
     }
 
-    function rngArray(l) {
-      return Math.floor(Math.random() * l);
-    }
-
     function plus(first, second) {
       return (!first) ? '+' : first + second;
     }
@@ -72,7 +68,7 @@
       answerElement.value = '';
       let newBGColors = '';
       for (i = 0; i < 6; i++) {
-        newBGColors += colors[rngArray(colors.length)];
+        newBGColors += colors[Math.floor(Math.random() * colors.length)];
       }
       document.body.style.backgroundColor = `#${newBGColors}`;
     }

@@ -30,6 +30,7 @@
     let answerElement;
     let nextElement;
     let barElement;
+    let frameCount = 0;
     const operations = [minus, plus];
     const colors = '1234567890abcdef'.split('');
     const problem = {};
@@ -53,6 +54,19 @@
         newProblem();
       } else {
         barElement.style.backgroundColor = '#FF8B8B';
+        visualizeError();
+      }
+    }
+
+    function visualizeError() {
+      if (frameCount < 36) {
+        answerElement.style.margin = `0 ${Math.sin(frameCount/1.8)*2.4}px`;
+        frameCount++;
+        requestAnimationFrame(visualizeError);
+      } else {
+        answerElement.style.margin = '0';
+        frameCount = 0;
+        cancelAnimationFrame(visualizeError);
       }
     }
 

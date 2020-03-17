@@ -56,14 +56,6 @@
       return (!first) ? '-' : first - second;
     }
 
-    function setBGColor() {
-      let newBGColors = '';
-      for (i = 0; i < 6; i++) {
-        newBGColors += colors[rngArray(colors.length)];
-      }
-      bodyElement.style.backgroundColor = `#${newBGColors}`;
-    }
-
     function next() {
       // parse input
       const input = parseInt(answerElement.value);
@@ -83,7 +75,11 @@
       secondElement.innerHTML = problem.second;
       operationElement.innerHTML = problem.operation();
       answerElement.value = '';
-      setBGColor();
+      let newBGColors = '';
+      for (i = 0; i < 6; i++) {
+        newBGColors += colors[rngArray(colors.length)];
+      }
+      bodyElement.style.backgroundColor = `#${newBGColors}`;
     }
 
     function newProblem() {

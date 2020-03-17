@@ -9,6 +9,7 @@
   <style>
     * {
       box-sizing: border-box;
+      font-size: 1.5rem;
     }
 
     input::-webkit-outer-spin-button,
@@ -115,18 +116,18 @@
   </script>
 </head>
 
-<body style="margin: 0; padding: 0; background: #194853; transition: all 0.6s;">
+<body style="margin: 0; background: #444; transition: all 0.6s;">
   <div
-    style="margin: 15% auto; max-width: 100%; font-size: 2rem; text-align: center; padding: 0.5rem; background: #fff; transition: all 0.1s;"
+    style="margin: 15% auto; max-width: 100%; text-align: center; padding: 0.5rem; background: #fff; transition: all 0.1s;"
     id="bar">
     <span id="first">0</span>
     <span id="operation">+</span>
     <span id="second">0</span>
     =
-    <input type="number" id="answer" maxlength="4" style="width:5rem; font-size: 2rem;" />
+    <input type="number" id="answer" maxlength="4" style="width:5rem;" />
     <div>
       <input type="submit" value="GO!" id="next"
-        style="padding: 1rem 2rem; margin-top: 0.5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
+        style="padding: .5rem 1rem; margin-top: 0.5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
     </div>
   </div>
 </body>

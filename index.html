@@ -56,15 +56,11 @@
     }
 
     function next() {
-      // parse input
       const input = parseInt(answerElement.value);
-      // check answer
       if (input === problem.answer) {
-        // if input is correct, update colors & create a new problem
         barElement.style.backgroundColor = '#FFF';
         newProblem();
       } else {
-        // if input is not correct, display error colors
         barElement.style.backgroundColor = '#FF8B8B';
       }
     }
@@ -82,7 +78,7 @@
     }
 
     function newProblem() {
-      // set numbers, but make larger number first as we don't want negative answers (0 is fine)
+      // set numbers (larger number first as we don't want negative answers)(0 is fine)
       const first = rng(1, 15);
       const second = rng(0, 9);
       if (first > second) {
@@ -92,36 +88,30 @@
         problem.first = second;
         problem.second = first;
       }
-      // set operator
       problem.operation = operations[rng(0, 1)];
-      // set answer
       problem.answer = problem.operation(
         problem.first,
         problem.second
       );
-      // update UI
       updateUI()
     }
 
     function start() {
-      // get page elements
       firstElement = document.getElementById('first');
       secondElement = document.getElementById('second');
       operationElement = document.getElementById('operation');
       answerElement = document.getElementById('answer');
       nextElement = document.getElementById('next');
       barElement = document.getElementById('bar');
-      // connect next button to next function
+
       nextElement.addEventListener('click', next);
-      // allow pressing enter within answer box to call next function as well
       answer.addEventListener('keyup', e => {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13) { // 13 = 'enter' key
           next();
         } else {
           return e;
         }
       });
-      // create a new problem
       newProblem();
     }
 

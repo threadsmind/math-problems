@@ -22,18 +22,34 @@
       -moz-appearance: textfield;
     }
   </style>
+</head>
+
+<body style="margin: 0; background: #444; transition: all .6s;">
+  <div
+    style="margin: 15% auto; max-width: 100%; text-align: center; padding: .5rem; background: #fff; transition: all .1s;"
+    id="bar">
+    <span id="first">0</span>
+    <span id="operation">+</span>
+    <span id="second">0</span>
+    =
+    <input type="number" id="answer" maxlength="4" style="width:5rem;" />
+    <div>
+      <input type="submit" value="GO!" id="next"
+        style="padding: .5rem 1rem; margin-top: .5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
+    </div>
+  </div>
 
   <script>
-    let firstElement;
-    let secondElement;
-    let operationElement;
-    let answerElement;
-    let nextElement;
-    let barElement;
-    let frameCount = 0;
+    const firstElement = document.getElementById('first');
+    const secondElement = document.getElementById('second');
+    const operationElement = document.getElementById('operation');
+    const answerElement = document.getElementById('answer');
+    const nextElement = document.getElementById('next');
+    const barElement = document.getElementById('bar');
     const operations = [minus, plus];
     const colors = '1234567890abcdef'.split('');
     const problem = {};
+    let frameCount = 0;
 
     function rng(l, h) {
       return Math.floor(Math.random() * (h - l + 1)) + l;
@@ -101,43 +117,16 @@
       updateUI()
     }
 
-    function start() {
-      firstElement = document.getElementById('first');
-      secondElement = document.getElementById('second');
-      operationElement = document.getElementById('operation');
-      answerElement = document.getElementById('answer');
-      nextElement = document.getElementById('next');
-      barElement = document.getElementById('bar');
-
-      nextElement.addEventListener('click', next);
-      answer.addEventListener('keyup', e => {
-        if (e.keyCode === 13) { // 13 = 'enter' key
-          next();
-        } else {
-          return e;
-        }
-      });
-      newProblem();
-    }
-
-    window.addEventListener('load', start);
+    nextElement.addEventListener('click', next);
+    answer.addEventListener('keyup', e => {
+      if (e.keyCode === 13) { // 13 = 'enter' key
+        next();
+      } else {
+        return e;
+      }
+    });
+    newProblem();
   </script>
-</head>
-
-<body style="margin: 0; background: #444; transition: all .6s;">
-  <div
-    style="margin: 15% auto; max-width: 100%; text-align: center; padding: .5rem; background: #fff; transition: all .1s;"
-    id="bar">
-    <span id="first">0</span>
-    <span id="operation">+</span>
-    <span id="second">0</span>
-    =
-    <input type="number" id="answer" maxlength="4" style="width:5rem;" />
-    <div>
-      <input type="submit" value="GO!" id="next"
-        style="padding: .5rem 1rem; margin-top: .5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
-    </div>
-  </div>
 </body>
 
 </html>

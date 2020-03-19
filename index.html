@@ -50,6 +50,7 @@
     const colors = '1234567890abcdef'.split('');
     const problem = {};
     let frameCount = 0;
+    let correctCount = 0;
 
     function rng(l, h) {
       return Math.floor(Math.random() * (h - l + 1)) + l;
@@ -67,6 +68,7 @@
       const input = parseInt(answerElement.value);
       if (input === problem.answer) {
         barElement.style.backgroundColor = '#FFF';
+        correctCount++;
         newProblem();
       } else {
         barElement.style.backgroundColor = '#FF8B8B';

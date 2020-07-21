@@ -21,25 +21,61 @@
     input[type=number] {
       -moz-appearance: textfield;
     }
+
+    body {
+      margin: 0;
+      background: #444;
+      transition: all .6s;
+    }
+
+    #bar {
+      margin: 15% 0;
+      max-width: 100%;
+      text-align: center;
+      padding: .5rem;
+      background: #fff;
+      transition: all .1s;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #next {
+      padding: .5rem 1rem;
+      margin-top: .5rem;
+      font-weight: bold;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+
+    #count {
+      padding: 1rem;
+      height: 100%;
+      text-align: center;
+      font-size: 3rem;
+      color: #bbb;
+    }
+
+    #answer {
+      width: 5rem;
+    }
   </style>
 </head>
 
-<body style="margin: 0; background: #444; transition: all .6s;">
-  <div
-    style="margin: 15% 0; max-width: 100%; text-align: center; padding: .5rem; background: #fff; transition: all .1s; display: flex; flex-direction: row; justify-content: center; align-items: center;"
-    id="bar">
+<body>
+  <div id="bar">
     <div>
       <span id="first">0</span>
       <span id="operation">+</span>
       <span id="second">0</span>
       =
-      <input type="number" id="answer" maxlength="4" style="width:5rem;" />
+      <input type="number" id="answer" maxlength="4" />
       <div>
-        <input type="submit" value="GO!" id="next"
-          style="padding: .5rem 1rem; margin-top: .5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
+        <input type="submit" value="GO!" id="next" />
       </div>
     </div>
-    <div style="padding: 1rem; height: 100%; text-align: center; font-size: 3rem; color: #bbb;" id="count">0</div>
+    <div id="count">0</div>
   </div>
 
   <script>

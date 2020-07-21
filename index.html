@@ -26,17 +26,20 @@
 
 <body style="margin: 0; background: #444; transition: all .6s;">
   <div
-    style="margin: 15% auto; max-width: 100%; text-align: center; padding: .5rem; background: #fff; transition: all .1s;"
+    style="margin: 15% 0; max-width: 100%; text-align: center; padding: .5rem; background: #fff; transition: all .1s; display: flex; flex-direction: row; justify-content: center; align-items: center;"
     id="bar">
-    <span id="first">0</span>
-    <span id="operation">+</span>
-    <span id="second">0</span>
-    =
-    <input type="number" id="answer" maxlength="4" style="width:5rem;" />
     <div>
-      <input type="submit" value="GO!" id="next"
-        style="padding: .5rem 1rem; margin-top: .5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
+      <span id="first">0</span>
+      <span id="operation">+</span>
+      <span id="second">0</span>
+      =
+      <input type="number" id="answer" maxlength="4" style="width:5rem;" />
+      <div>
+        <input type="submit" value="GO!" id="next"
+          style="padding: .5rem 1rem; margin-top: .5rem; font-weight: bold; border-radius: 1rem; cursor: pointer;" />
+      </div>
     </div>
+    <div style="padding: 1rem; height: 100%; text-align: center; font-size: 3rem; color: #bbb;" id="count">0</div>
   </div>
 
   <script>
@@ -46,6 +49,7 @@
     const answerElement = document.getElementById('answer');
     const nextElement = document.getElementById('next');
     const barElement = document.getElementById('bar');
+    const countElement = document.getElementById('count');
     const operations = [minus, plus];
     const colors = '1234567890abcdef'.split('');
     const problem = {};
@@ -78,7 +82,7 @@
 
     function visualizeError() {
       if (frameCount < 36) {
-        answerElement.style.margin = `0 ${Math.sin(frameCount/1.8)*2.4}px`;
+        answerElement.style.margin = `0 ${Math.sin(frameCount / 1.8) * 2.4}px`;
         frameCount++;
         requestAnimationFrame(visualizeError);
       } else {
@@ -93,6 +97,7 @@
       secondElement.innerText = problem.second;
       operationElement.innerText = problem.operation();
       answerElement.value = '';
+      countElement.innerText = correctCount;
       let newBGColors = '';
       for (i = 0; i < 6; i++) {
         newBGColors += colors[Math.floor(Math.random() * colors.length)];

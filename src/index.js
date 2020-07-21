@@ -11,6 +11,7 @@ const colors = '1234567890abcdef'.split('');
 const problem = {};
 let frameCount = 0;
 let correctCount = 0;
+let lastAnswerCorrect = false;
 
 function rng(l, h) {
   return Math.floor(Math.random() * (h - l + 1)) + l;
@@ -28,25 +29,31 @@ function next() {
   const input = parseInt(answerElement.value);
   if (input === problem.answer) {
     correctCount++;
+    barElement.style.backgroundColor = '#70db70';
+    lastAnswerCorrect = true;
+    visualFeedback();
     newProblem();
   } else {
     if (frameCount === 0) {
       barElement.style.backgroundColor = '#FF8B8B';
-      visualizeError();
+      lastAnswerCorrect = false;
+      visualFeedback();
     }
   }
 }
 
-function visualizeError() {
+function visualFeedback() {
   if (frameCount < 36) {
-    answerElement.style.margin = `0 ${Math.sin(frameCount / 2) * 6}px 0 0`;
+    if (!lastAnswerCorrect) {
+      answerElement.style.margin = `0 ${Math.sin(frameCount / 2) * 6}px 0 0`;
+    }
     frameCount++;
-    requestAnimationFrame(visualizeError);
+    requestAnimationFrame(visualFeedback);
   } else {
     answerElement.style.margin = '0';
     barElement.style.backgroundColor = '#FFF';
     frameCount = 0;
-    cancelAnimationFrame(visualizeError);
+    cancelAnimationFrame(visualFeedback);
   }
 }
 

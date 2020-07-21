@@ -20,6 +20,8 @@ body {
 }
 
 #bar {
+  border-top: 2px solid #444;
+  border-bottom: 2px solid #444;
   margin: 15% 0;
   max-width: 100%;
   text-align: center;

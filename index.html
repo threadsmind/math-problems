@@ -89,9 +89,9 @@
     }
 
     function updateUI() {
-      firstElement.innerHTML = problem.first;
-      secondElement.innerHTML = problem.second;
-      operationElement.innerHTML = problem.operation();
+      firstElement.innerText = problem.first;
+      secondElement.innerText = problem.second;
+      operationElement.innerText = problem.operation();
       answerElement.value = '';
       let newBGColors = '';
       for (i = 0; i < 6; i++) {

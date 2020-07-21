@@ -5,6 +5,7 @@ const answerElement = document.getElementById('answer');
 const nextElement = document.getElementById('next');
 const barElement = document.getElementById('bar');
 const countElement = document.getElementById('count');
+const problemElement = document.getElementById('problem');
 const operations = [minus, plus];
 const colors = '1234567890abcdef'.split('');
 const problem = {};
@@ -26,22 +27,24 @@ function minus(first, second) {
 function next() {
   const input = parseInt(answerElement.value);
   if (input === problem.answer) {
-    barElement.style.backgroundColor = '#FFF';
     correctCount++;
     newProblem();
   } else {
-    barElement.style.backgroundColor = '#FF8B8B';
-    visualizeError();
+    if (frameCount === 0) {
+      barElement.style.backgroundColor = '#FF8B8B';
+      visualizeError();
+    }
   }
 }
 
 function visualizeError() {
   if (frameCount < 36) {
-    answerElement.style.margin = `0 ${Math.sin(frameCount / 1.8) * 2.4}px`;
+    answerElement.style.margin = `0 ${Math.sin(frameCount / 2) * 6}px 0 0`;
     frameCount++;
     requestAnimationFrame(visualizeError);
   } else {
     answerElement.style.margin = '0';
+    barElement.style.backgroundColor = '#FFF';
     frameCount = 0;
     cancelAnimationFrame(visualizeError);
   }
